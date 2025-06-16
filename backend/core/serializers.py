@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, EmployerProfile, Job
+from .models import User, EmployerProfile, Job, CandidateProfile, JobApplication
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -36,3 +36,14 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ['id', 'title', 'description', 'location', 'posted_at', 'employer']
+
+
+class CandidateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CandidateProfile
+        fields = '__all__'
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobApplication
+        fields = '__all__'

@@ -23,3 +23,18 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+class CandidateProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    resume = models.TextField(blank=True)
+    skills = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"Candidate: {self.user.username}"
+class JobApplication(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE)
+    cover_letter = models.TextField(blank=True)
+    applied_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.candidate.user.username} applied to {self.job.title}"
