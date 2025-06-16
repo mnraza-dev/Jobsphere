@@ -1,6 +1,9 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .models import User, EmployerProfile, Job
-from .serializers import UserSerializer, EmployerProfileSerializer, JobSerializer
+from .serializers import UserSerializer,RegisterSerializer, EmployerProfileSerializer, JobSerializer
+
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
